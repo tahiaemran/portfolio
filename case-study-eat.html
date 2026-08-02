@@ -35,9 +35,24 @@
 
   <section class="case-block">
     <p class="label">Try it</p>
-    <p>This is the actual click-through prototype — tap through the flow yourself before reading the reasoning below.</p>
-    <div style="display:flex; justify-content:center; padding:20px 0 4px;">
-      <iframe src="demo-eat.html" style="width:390px; height:780px; max-width:100%; border:none; border-radius:20px; box-shadow:0 12px 32px rgba(15,42,87,0.18);" title="What's for Dinner interactive prototype"></iframe>
+    <p>These are real screens from the working build, not a mockup — including the moment the LLM fallback actually fires.</p>
+    <div class="screenshot-grid">
+      <figure>
+        <img src="screenshots/eat-1-input.png" alt="Input screen: time available, cuisine, and kitchen ingredients">
+        <figcaption>Input — time, cuisine, what's in the kitchen</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/eat-2-results.png" alt="Results screen showing ranked curated recipes with missing ingredients called out">
+        <figcaption>Curated results, ranked by ingredient match</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/eat-3-mood.png" alt="Mood-based input screen for the LLM fallback flow">
+        <figcaption>"I'm in the mood for…" — the fallback entry point</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/eat-4-fallback.png" alt="Generated recipe result flagged as a custom, not-yet-reviewed recipe, showing 15.31 second generation time">
+        <figcaption>The fallback firing — flagged as custom, not reviewed</figcaption>
+      </figure>
     </div>
   </section>
 
@@ -86,7 +101,7 @@
 
   <section class="case-block">
     <p class="label">Proof it works</p>
-    <p>I've used it myself for [X weeks] and shared it with a few friends. Early matching logic was lenient — a partial match would display directly rather than falling back to generation. I tightened this so any mismatch on ingredients or time triggers the fallback instead of showing a weak match.</p>
+    <p>I've used it myself for 2 weeks and shared it with a few friends. Early matching logic was lenient — a partial match would display directly rather than falling back to generation. I tightened this so any mismatch on ingredients or time triggers the fallback instead of showing a weak match.</p>
     <div class="stat-callout">Fallback now fires on roughly <b>50%</b> of requests</div>
     <p>Watching those fallback cases, a pattern emerged: the recipes going missing were often the simple, well-loved ones (garlic-and-olive-oil pasta, for instance) — telling me the curated list needs more "boring but reliable" recipes, not more variety.</p>
   </section>

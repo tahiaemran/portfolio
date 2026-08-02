@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walk NYC — Case Study</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="nav-shell">
+  <nav class="pill-nav">
+    <a href="index.html">Home</a>
+    <a href="mailto:you@example.com">Contact</a>
+  </nav>
+</div>
+
+<main class="case-page">
+
+  <a class="back-link" href="index.html">← All projects</a>
+
+  <header class="case-hero">
+    <h1>Walk NYC</h1>
+    <p class="case-tags">iOS · SwiftUI · MapKit · Solo build</p>
+  </header>
+
+  <section class="case-block">
+    <p class="hook-line">Fewest stops isn't always the best trip.</p>
+    <p>Sometimes a 15-minute walk down a scenic waterfront corridor beats three transfers underground. This app lets you optimize a subway trip for walking minutes, not just speed — with a "fewest stops" mode and a "target walk time" mode.</p>
+  </section>
+
+  <section class="case-block">
+    <p class="label">The UX</p>
+    <p>A storyboard of the three core screens — fewest-stops mode, target-walk-time mode, and the avoid/preferred station settings.</p>
+    <div style="padding:12px 0 4px;">
+      <iframe src="demo-transit.html" style="width:100%; height:760px; border:none; border-radius:14px; box-shadow:0 8px 24px rgba(15,42,87,0.12);" title="NYC transit app storyboard"></iframe>
+    </div>
+  </section>
+
+  <section class="case-block">
+    <p class="label">Status</p>
+    <div class="progress-notice">Full decision log for this project isn't written up yet — this page is a placeholder so the project is visible while the write-up is in progress. Two decisions worth flagging in the meantime below.</div>
+  </section>
+
+  <section class="case-block">
+    <p class="label">Early decisions worth naming</p>
+
+    <div class="decision-card">
+      <div class="d-row"><span class="k">Decision</span><p class="v">The "avoid list" (stations a user won't walk to) is 100% manually declared by the user — no algorithmic safety scoring of any kind.</p></div>
+      <div class="d-row"><span class="k">Why</span><p class="v">[To fill in — likely something about accuracy, liability, or trusting a judgment call this personal to a user.]</p></div>
+    </div>
+
+    <div class="decision-card">
+      <div class="d-row"><span class="k">Decision</span><p class="v">Scenic corridors are seeded as a small, hand-picked list of station pairs with a "scenic" flag — not derived from mapped routes or external data.</p></div>
+      <div class="d-row"><span class="k">Why</span><p class="v">[To fill in — likely a scope call similar to the recipe curation approach: get the core loop working before investing in more precise geodata.]</p></div>
+    </div>
+
+  </section>
+
+</main>
+
+<p class="footer-note"><a href="index.html">← Back to all projects</a></p>
+
+</body>
+</html>

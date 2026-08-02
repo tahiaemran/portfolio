@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Decide Now — UX Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#EDE4D3;
+    --cream-2:#E4D9C4;
+    --olive:#4A5A40;
+    --olive-dark:#37432F;
+    --spice:#A63D2F;
+    --spice-dark:#8A311F;
+    --ink:#2B2620;
+    --mustard:#C89B3C;
+    --paper-line: rgba(43,38,32,0.14);
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin:0; padding:40px 20px; min-height:100vh;
+    background: #d8cdb8;
+    display:flex; align-items:center; justify-content:center;
+    font-family: var(--font-body);
+  }
+  .device {
+    width: 390px; height: 780px;
+    background: var(--cream);
+    border-radius: 46px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35), 0 0 0 10px #1a1712, 0 0 0 12px #3a342a;
+    overflow: hidden;
+    position: relative;
+    display:flex; flex-direction:column;
+  }
+  .notch {
+    position:absolute; top:0; left:50%; transform:translateX(-50%);
+    width:120px; height:26px; background:#1a1712; border-radius:0 0 16px 16px; z-index:50;
+  }
+  .screen {
+    position:absolute; inset:0; padding:56px 22px 24px;
+    overflow-y:auto; -ms-overflow-style:none; scrollbar-width:none;
+    background: var(--cream);
+    transition: transform .38s cubic-bezier(.22,.9,.32,1), opacity .3s ease;
+  }
+  .screen::-webkit-scrollbar{ display:none; }
+  .screen.hidden { transform: translateX(24px); opacity:0; pointer-events:none; }
+
+  .eyebrow {
+    font-family: var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase;
+    color: var(--olive); font-weight:700; margin:0 0 4px;
+  }
+  h1 {
+    font-family: var(--font-display); font-weight:600; font-size:28px; line-height:1.15;
+    color: var(--ink); margin:0 0 18px;
+  }
+  h2 {
+    font-family: var(--font-display); font-weight:600; font-size:19px; color:var(--ink); margin:0 0 10px;
+  }
+  .section-label {
+    font-family: var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color: rgba(43,38,32,0.55); font-weight:700; margin:22px 0 10px;
+  }
+
+  /* pantry-label chips */
+  .chip-row { display:flex; flex-wrap:wrap; gap:9px; }
+  .chip {
+    font-family: var(--font-mono); font-size:12.5px; font-weight:700;
+    padding:8px 13px; border-radius:3px;
+    border: 1.5px solid var(--ink);
+    background: var(--cream-2);
+    color: var(--ink);
+    cursor:pointer; user-select:none;
+    transform: rotate(-0.6deg);
+    position:relative;
+    transition: all .15s ease;
+    box-shadow: 1px 1px 0 rgba(43,38,32,0.25);
+  }
+  .chip:nth-child(3n){ transform: rotate(0.7deg); }
+  .chip:nth-child(3n+1){ transform: rotate(-0.9deg); }
+  .chip:active { transform: scale(0.96) rotate(0deg); }
+  .chip.selected {
+    background: var(--olive); color: var(--cream); border-color: var(--olive-dark);
+  }
+  .chip.selected.spice { background: var(--spice); border-color: var(--spice-dark); }
+  .chip.removable::after {
+    content: "×"; margin-left:7px; font-weight:700;
+  }
+
+  .time-row { display:flex; gap:8px; }
+  .time-chip {
+    flex:1; text-align:center; font-family:var(--font-mono); font-size:12px; font-weight:700;
+    padding:11px 4px; border-radius:8px; border:1.5px solid var(--ink);
+    background: var(--cream-2); color:var(--ink); cursor:pointer;
+  }
+  .time-chip.selected { background: var(--ink); color:var(--cream); }
+
+  /* ingredient search */
+  .search-box {
+    display:flex; align-items:center; gap:8px;
+    background: #fff; border:1.5px solid var(--ink); border-radius:10px;
+    padding:11px 13px; font-family: var(--font-body); font-size:14px;
+    margin-bottom:12px;
+  }
+  .search-box input { border:none; outline:none; flex:1; font-family:var(--font-body); font-size:14px; background:transparent; color:var(--ink); }
+  .kitchen-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px; }
+  .ing-pill {
+    display:flex; align-items:center; gap:6px;
+    background: var(--olive); color: var(--cream);
+    font-family:var(--font-body); font-size:13px; font-weight:500;
+    padding:7px 11px; border-radius:20px;
+  }
+  .ing-pill .x { cursor:pointer; opacity:.75; font-weight:700; }
+  .staple-hint { font-size:12px; color: rgba(43,38,32,0.55); margin:10px 0 4px; font-style:italic; }
+
+  .cta {
+    margin-top:26px; width:100%; padding:16px; border:none; border-radius:12px;
+    background: var(--spice); color:#fff; font-family:var(--font-body); font-weight:700; font-size:15.5px;
+    cursor:pointer; box-shadow: 0 6px 0 var(--spice-dark);
+    transition: transform .08s ease;
+  }
+  .cta:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--spice-dark); }
+
+  .skip-note { text-align:center; font-size:11.5px; color: rgba(43,38,32,0.5); margin-top:10px; font-family:var(--font-mono); }
+
+  /* results screen */
+  .active-filters { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:16px; }
+  .recipe-card {
+    background: #fff; border:1.5px solid var(--ink); border-radius:14px;
+    padding:16px; margin-bottom:14px; position:relative; cursor:pointer;
+    box-shadow: 2px 3px 0 rgba(43,38,32,0.12);
+  }
+  .recipe-card .name { font-family: var(--font-display); font-size:19px; font-weight:600; color:var(--ink); margin:0 0 6px; }
+  .recipe-meta { display:flex; gap:10px; font-family:var(--font-mono); font-size:11.5px; color: var(--olive-dark); font-weight:700; margin-bottom:8px; }
+  .recipe-meta span.missing { color: var(--spice); }
+  .why-note {
+    font-size:12.5px; color: var(--ink); background: #FAF3E5; border-left:3px solid var(--mustard);
+    padding:7px 10px; border-radius:0 6px 6px 0; font-style:italic;
+  }
+
+  .refine-box {
+    margin-top:8px; display:flex; align-items:center; gap:8px;
+    background:#fff; border:1.5px solid var(--ink); border-radius:10px; padding:11px 13px;
+  }
+  .refine-box input { border:none; outline:none; flex:1; font-family:var(--font-body); font-size:13.5px; background:transparent; color:var(--ink); }
+  .refine-box button {
+    border:none; background: var(--ink); color:var(--cream); font-family:var(--font-mono); font-size:11px;
+    font-weight:700; padding:8px 12px; border-radius:6px; cursor:pointer;
+  }
+
+  .back-btn {
+    position:absolute; top:16px; left:20px; font-family:var(--font-mono); font-size:12px; font-weight:700;
+    color: var(--ink); cursor:pointer; z-index:10; background:rgba(237,228,211,0.9); padding:5px 9px; border-radius:6px;
+  }
+
+  /* detail screen */
+  .ingredient-line { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--paper-line); font-size:14px; }
+  .ingredient-line .dot { width:6px; height:6px; border-radius:50%; background:var(--olive); }
+  .step-item { display:flex; gap:12px; padding:10px 0; border-bottom:1px solid var(--paper-line); }
+  .step-num { font-family:var(--font-mono); font-weight:700; color:var(--spice); font-size:14px; min-width:20px; }
+  .step-text { font-size:14px; line-height:1.5; color:var(--ink); }
+
+  .toast {
+    position:absolute; bottom:20px; left:22px; right:22px;
+    background: var(--ink); color:var(--cream); font-family:var(--font-mono); font-size:12px;
+    padding:10px 14px; border-radius:8px; text-align:center; opacity:0; transform:translateY(10px);
+    transition: all .3s ease; pointer-events:none; z-index:60;
+  }
+  .toast.show { opacity:1; transform:translateY(0); }
+  body.theme-herb {
+    --cream:#EEF0E4; --cream-2:#E2E6D4;
+    --olive:#3C6E52; --olive-dark:#2A4F3A;
+    --spice:#6B3F63; --spice-dark:#502E4A;
+    --ink:#232B22; --mustard:#B8933E;
+    --paper-line: rgba(35,43,34,0.14);
+  }
+  body.theme-dusk {
+    --cream:#E9E6F2; --cream-2:#DCD7EC;
+    --olive:#3E4C8A; --olive-dark:#2C3763;
+    --spice:#5B2F5E; --spice-dark:#43223F;
+    --ink:#232042; --mustard:#7A6BC2;
+    --paper-line: rgba(35,32,66,0.14);
+  }
+  body.theme-blueberry {
+    --cream:#E6EEEC; --cream-2:#D8E6E2;
+    --olive:#2F6E68; --olive-dark:#20504B;
+    --spice:#4B3A82; --spice-dark:#372A61;
+    --ink:#1E2E2C; --mustard:#5D8B7A;
+    --paper-line: rgba(30,46,44,0.14);
+  }
+
+  .theme-switch {
+    position: fixed; top: 14px; left: 50%; transform: translateX(-50%);
+    display:flex; gap:10px; z-index:100; background:rgba(255,255,255,0.85);
+    padding:8px 12px; border-radius:20px; box-shadow:0 4px 14px rgba(0,0,0,0.15);
+  }
+  .theme-switch button {
+    width:30px; height:30px; border-radius:50%; border:2px solid #fff; cursor:pointer;
+    box-shadow: 0 0 0 1.5px rgba(0,0,0,0.25);
+  }
+  .theme-switch button.active { box-shadow: 0 0 0 2.5px #000; }
+  .swatch-kraft { background: linear-gradient(135deg,#A63D2F 50%, #4A5A40 50%); }
+  .swatch-herb { background: linear-gradient(135deg,#6B3F63 50%, #3C6E52 50%); }
+  .swatch-dusk { background: linear-gradient(135deg,#5B2F5E 50%, #3E4C8A 50%); }
+  .swatch-blueberry { background: linear-gradient(135deg,#4B3A82 50%, #2F6E68 50%); }
+</style>
+</head>
+<body>
+<div class="theme-switch" id="theme-switch">
+  <button class="swatch-kraft active" data-theme="" title="Pantry Label (original)"></button>
+  <button class="swatch-herb" data-theme="theme-herb" title="Herb Garden"></button>
+  <button class="swatch-dusk" data-theme="theme-dusk" title="Dusk Kitchen"></button>
+  <button class="swatch-blueberry" data-theme="theme-blueberry" title="Blueberry Sage"></button>
+</div>
+
+<div class="device">
+  <div class="notch"></div>
+
+  <!-- SCREEN 1: Input -->
+  <div class="screen" id="screen-input">
+    <div class="eyebrow">Decide Now</div>
+    <h1>What should<br>I eat?</h1>
+
+    <div class="section-label">How much time do you have?</div>
+    <div class="time-row" id="time-row">
+      <div class="time-chip" data-val="under15">&lt;15m</div>
+      <div class="time-chip selected" data-val="15to30">15–30m</div>
+      <div class="time-chip" data-val="30to60">30–60m</div>
+      <div class="time-chip" data-val="over60">60m+</div>
+    </div>
+
+    <div class="section-label">Cuisine <span style="opacity:.6; font-weight:500;">(optional)</span></div>
+    <div class="chip-row" id="cuisine-row">
+      <div class="chip selected" data-val="none">No preference</div>
+      <div class="chip" data-val="italian">Italian</div>
+      <div class="chip" data-val="asian">Asian</div>
+      <div class="chip" data-val="mexican">Mexican</div>
+      <div class="chip" data-val="comfort">Comfort</div>
+    </div>
+
+    <div class="section-label">What's in your kitchen?</div>
+    <div class="search-box">
+      <span style="opacity:.5;">⌕</span>
+      <input placeholder="Search or add an ingredient..." id="ing-search">
+      <span style="font-family:var(--font-mono); font-size:13px; opacity:.6; cursor:pointer;" id="camera-btn">📷</span>
+    </div>
+    <div class="kitchen-list" id="kitchen-list"></div>
+    <div class="staple-hint">Tap to quick-add a staple:</div>
+    <div class="chip-row" id="staple-row">
+      <div class="chip" data-name="Eggs">Eggs</div>
+      <div class="chip" data-name="Rice">Rice</div>
+      <div class="chip" data-name="Pasta">Pasta</div>
+      <div class="chip" data-name="Onion">Onion</div>
+      <div class="chip" data-name="Garlic">Garlic</div>
+      <div class="chip" data-name="Olive oil">Olive oil</div>
+      <div class="chip" data-name="Soy sauce">Soy sauce</div>
+      <div class="chip" data-name="Spinach">Spinach</div>
+    </div>
+
+    <button class="cta" id="find-btn">Find something to eat</button>
+    <div class="skip-note">Time + cuisine save for next time</div>
+  </div>
+
+  <!-- SCREEN 2: Results -->
+  <div class="screen hidden" id="screen-results">
+    <div class="back-btn" data-back="screen-input">‹ Edit</div>
+    <div style="height:6px;"></div>
+    <h2 style="margin-top:8px;">Here's what fits</h2>
+    <div class="active-filters" id="active-filters"></div>
+
+    <div id="recipe-list"></div>
+
+    <div class="section-label">Not feeling it?</div>
+    <div class="chip-row" id="mood-chips">
+      <div class="chip spice" data-mood="Asian">Asian</div>
+      <div class="chip spice" data-mood="No chicken">No chicken</div>
+      <div class="chip spice" data-mood="Comfort food">Comfort food</div>
+      <div class="chip spice" data-mood="Surprise me">Surprise me</div>
+    </div>
+    <div class="refine-box">
+      <input placeholder="Or tell me what you're in the mood for..." id="refine-input">
+      <button id="refine-go">GO</button>
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Detail -->
+  <div class="screen hidden" id="screen-detail">
+    <div class="back-btn" data-back="screen-results">‹ Back</div>
+    <div style="height:8px;"></div>
+    <div class="eyebrow" id="detail-time">30 min · asian</div>
+    <h1 id="detail-name">Recipe name</h1>
+
+    <div class="section-label">Ingredients</div>
+    <div id="detail-ingredients"></div>
+
+    <div class="section-label">Steps</div>
+    <div id="detail-steps"></div>
+
+    <button class="cta" style="margin-top:26px;">Start cooking</button>
+  </div>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+const state = {
+  time: '15to30',
+  cuisine: 'none',
+  kitchen: ['Garlic','Onion','Spinach'],
+  activeRefinements: []
+};
+
+const RECIPES = [
+  {name:'Garlic Butter Shrimp Pasta', time:20, cuisine:'italian', mood:['comfort'], required:['pasta','garlic','olive oil','shrimp'], steps:['Boil pasta until al dente.','Sauté garlic in butter and olive oil.','Add shrimp, cook until pink.','Toss pasta with sauce, finish with parsley.']},
+  {name:'Soy-Glazed Chicken & Rice', time:25, cuisine:'asian', mood:['comfort'], required:['rice','soy sauce','chicken','garlic'], steps:['Cook rice.','Sear chicken thighs.','Whisk soy sauce, garlic, and a touch of honey.','Glaze chicken in the sauce, serve over rice.']},
+  {name:'Spinach & Egg Skillet', time:12, cuisine:'comfort', mood:['light'], required:['spinach','eggs','onion','olive oil'], steps:['Sauté onion in olive oil.','Wilt spinach into the pan.','Make wells, crack eggs directly in.','Cover and cook until whites set.']},
+  {name:'Quick Tomato Onion Pasta', time:18, cuisine:'italian', mood:['comfort'], required:['pasta','onion','garlic','olive oil'], steps:['Boil pasta.','Sauté onion and garlic until soft.','Simmer with crushed tomato.','Toss pasta through sauce.']},
+  {name:'Sesame Garlic Rice Bowl', time:15, cuisine:'asian', mood:['light'], required:['rice','garlic','soy sauce','spinach'], steps:['Cook rice.','Blanch spinach briefly.','Whisk soy sauce, sesame, garlic.','Assemble bowl, drizzle sauce.']}
+];
+
+function normalize(list){ return list.map(i=>i.toLowerCase()); }
+
+function computeResults(){
+  let pool = RECIPES.slice();
+  let relaxedMsgs = [];
+
+  if(state.cuisine !== 'none'){
+    let filtered = pool.filter(r=>r.cuisine===state.cuisine);
+    if(filtered.length < 2){ relaxedMsgs.push('Cuisine filter relaxed — not enough matches'); }
+    else pool = filtered;
+  }
+
+  const timeCeiling = {under15:15, '15to30':30, '30to60':60, over60:999}[state.time];
+  let timeFiltered = pool.filter(r=>r.time<=timeCeiling);
+  if(timeFiltered.length < 2){ relaxedMsgs.push('Time relaxed — showing nearby options'); }
+  else pool = timeFiltered;
+
+  state.activeRefinements.forEach(ref=>{
+    const lower = ref.toLowerCase();
+    if(lower.includes('no ')){
+      const excl = lower.replace('no ','').trim();
+      pool = pool.filter(r=>!r.required.some(i=>i.includes(excl)));
+    } else if(['asian','italian','mexican','comfort'].includes(lower)){
+      const m = pool.filter(r=>r.cuisine===lower);
+      if(m.length) pool = m;
+    } else if(lower.includes('surprise')){
+      pool = pool.sort(()=>Math.random()-0.5);
+    }
+  });
+
+  const kitchenLower = normalize(state.kitchen);
+  pool = pool.map(r=>{
+    const matched = r.required.filter(i=>kitchenLower.includes(i));
+    return {...r, matchScore: matched.length/r.required.length, matched, missing: r.required.filter(i=>!matched.includes(i))};
+  }).sort((a,b)=> b.matchScore - a.matchScore || a.time - b.time);
+
+  return {pool: pool.slice(0,5), relaxedMsgs};
+}
+
+function renderInput(){
+  document.querySelectorAll('.time-chip').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.val===state.time);
+  });
+  document.querySelectorAll('#cuisine-row .chip').forEach(el=>{
+    el.classList.toggle('selected', el.dataset.val===state.cuisine);
+  });
+  const kl = document.getElementById('kitchen-list');
+  kl.innerHTML = state.kitchen.map(ing=>`<div class="ing-pill">${ing} <span class="x" data-ing="${ing}">×</span></div>`).join('');
+}
+
+function renderResults(){
+  const {pool, relaxedMsgs} = computeResults();
+  const af = document.getElementById('active-filters');
+  let chips = [];
+  if(state.cuisine!=='none') chips.push(state.cuisine);
+  chips = chips.concat(state.activeRefinements);
+  af.innerHTML = chips.map(c=>`<div class="chip selected removable" data-remove="${c}">${c}</div>`).join('')
+    + relaxedMsgs.map(m=>`<div style="font-family:var(--font-mono); font-size:11px; color:var(--spice); width:100%; margin-top:4px;">${m}</div>`).join('');
+
+  const rl = document.getElementById('recipe-list');
+  if(pool.length===0){
+    rl.innerHTML = `<div style="text-align:center; padding:30px 10px; font-family:var(--font-mono); font-size:13px; color:var(--olive-dark);">Nothing matched — try removing a filter above.</div>`;
+    return;
+  }
+  rl.innerHTML = pool.map((r,i)=>`
+    <div class="recipe-card" data-idx="${i}">
+      <div class="name">${r.name}</div>
+      <div class="recipe-meta">
+        <span>${r.time} min</span>
+        <span>${r.matched.length}/${r.required.length} ingredients${r.missing.length? ' <span class=\"missing\">— missing '+r.missing.join(', ')+'</span>':''}</span>
+      </div>
+      <div class="why-note">${r.missing.length===0 ? 'You have everything — zero grocery run needed.' : 'Quick, uses up your '+ (r.matched[0]||'ingredients') + '.'}</div>
+    </div>
+  `).join('');
+  window._currentPool = pool;
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 1800);
+}
+
+document.getElementById('time-row').addEventListener('click', e=>{
+  const el = e.target.closest('.time-chip'); if(!el) return;
+  state.time = el.dataset.val; renderInput();
+});
+document.getElementById('cuisine-row').addEventListener('click', e=>{
+  const el = e.target.closest('.chip'); if(!el) return;
+  state.cuisine = el.dataset.val; renderInput();
+});
+document.getElementById('staple-row').addEventListener('click', e=>{
+  const el = e.target.closest('.chip'); if(!el) return;
+  const name = el.dataset.name;
+  if(!state.kitchen.includes(name)) state.kitchen.push(name);
+  renderInput();
+});
+document.getElementById('kitchen-list').addEventListener('click', e=>{
+  const x = e.target.closest('.x'); if(!x) return;
+  state.kitchen = state.kitchen.filter(i=>i!==x.dataset.ing);
+  renderInput();
+});
+document.getElementById('ing-search').addEventListener('keypress', e=>{
+  if(e.key==='Enter' && e.target.value.trim()){
+    state.kitchen.push(e.target.value.trim());
+    e.target.value=''; renderInput();
+  }
+});
+document.getElementById('camera-btn').addEventListener('click', ()=>{
+  toast('Photo scan → draft review screen (see v2 spec)');
+});
+document.getElementById('find-btn').addEventListener('click', ()=>{
+  showScreen('screen-results'); renderResults();
+});
+document.querySelectorAll('.back-btn').forEach(b=>{
+  b.addEventListener('click', ()=> showScreen(b.dataset.back));
+});
+document.getElementById('recipe-list').addEventListener('click', e=>{
+  const card = e.target.closest('.recipe-card'); if(!card) return;
+  const r = window._currentPool[card.dataset.idx];
+  document.getElementById('detail-name').textContent = r.name;
+  document.getElementById('detail-time').textContent = `${r.time} min · ${r.cuisine}`;
+  document.getElementById('detail-ingredients').innerHTML = r.required.map(i=>`<div class="ingredient-line"><span class="dot"></span>${i}</div>`).join('');
+  document.getElementById('detail-steps').innerHTML = r.steps.map((s,i)=>`<div class="step-item"><span class="step-num">${i+1}</span><span class="step-text">${s}</span></div>`).join('');
+  showScreen('screen-detail');
+});
+document.getElementById('mood-chips').addEventListener('click', e=>{
+  const el = e.target.closest('.chip'); if(!el) return;
+  const val = el.dataset.mood;
+  if(!state.activeRefinements.includes(val)) state.activeRefinements.push(val);
+  renderResults();
+});
+document.getElementById('active-filters').addEventListener('click', e=>{
+  const el = e.target.closest('[data-remove]'); if(!el) return;
+  const val = el.dataset.remove;
+  state.activeRefinements = state.activeRefinements.filter(r=>r!==val);
+  if(state.cuisine===val) state.cuisine='none';
+  renderResults();
+});
+document.getElementById('refine-go').addEventListener('click', ()=>{
+  const input = document.getElementById('refine-input');
+  if(input.value.trim()){
+    state.activeRefinements.push(input.value.trim());
+    input.value='';
+    renderResults();
+    toast('Interpreted via model call → filtered candidates');
+  }
+});
+
+renderInput();
+
+document.getElementById('theme-switch').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  document.body.className = btn.dataset.theme;
+  document.querySelectorAll('.theme-switch button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+});
+</script>
+
+</body>
+</html>

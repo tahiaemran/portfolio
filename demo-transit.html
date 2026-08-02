@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NYC Walk-Optimized Transit App — Storyboard</title>
+<style>
+  :root {
+    --bg-page: #f2f1ec;
+    --surface: #ffffff;
+    --border: #e2e0d8;
+    --border-strong: #c9c6ba;
+    --text-primary: #1c1c1a;
+    --text-secondary: #6b6a63;
+    --accent: #185fa5;
+    --accent-bg: #e6f1fb;
+    --brand: #3c3489;
+    --success: #3b6d11;
+    --success-bg: #eaf3de;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 40px 24px;
+  }
+  h1 { font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  .intro { color: var(--text-secondary); font-size: 14px; max-width: 640px; margin-bottom: 40px; line-height: 1.5; }
+  .board {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    align-items: flex-start;
+  }
+  .frame-block { width: 320px; }
+  .frame-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .phone {
+    position: relative;
+    width: 320px;
+    height: 640px;
+    border-radius: 36px;
+    overflow: hidden;
+    background: var(--bg-page);
+    border: 6px solid #111;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .notch {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 120px; height: 22px;
+    background: #111;
+    border-radius: 0 0 14px 14px;
+    z-index: 20;
+  }
+  .status-bar { position: absolute; top: 6px; left: 24px; right: 24px; display:flex; justify-content:space-between; font-size:11px; font-weight:600; z-index:20; }
+
+  .map-bg { position: absolute; inset: 0; }
+
+  .search-stack { position: absolute; top: 40px; left: 14px; right: 14px; display:flex; flex-direction:column; gap: 8px; z-index: 10; }
+  .search-field {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 10px 12px;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .dot-origin { width:8px; height:8px; border-radius:50%; background: var(--brand); flex-shrink:0; }
+  .dot-dest { width:8px; height:8px; border-radius:2px; background: #c0392b; flex-shrink:0; }
+  .field-text { color: var(--text-secondary); }
+
+  /* generous gap called out by the user: 24px between last input and toggle */
+  .mode-toggle {
+    position: absolute; left: 14px; right: 14px; z-index: 10;
+    display: flex; background: var(--surface); border-radius: var(--radius);
+    border: 1px solid var(--border); padding: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .mode-btn { flex:1; text-align:center; font-size: 12px; padding: 7px 0; border-radius: 7px; }
+  .mode-btn.active { background: #1c1c1a; color: #fff; font-weight: 600; }
+  .mode-btn.inactive { color: var(--text-secondary); }
+
+  .minutes-row {
+    position: absolute; left: 14px; right: 14px; z-index: 10;
+    background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border);
+    padding: 12px 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .minutes-row .label { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+  .slider-track { position: relative; height: 4px; background: var(--border-strong); border-radius: 2px; }
+  .slider-fill { position:absolute; left:0; top:0; height:4px; width: 55%; background: var(--accent); border-radius: 2px; }
+  .slider-thumb { position:absolute; top:-7px; left: 55%; width:18px; height:18px; border-radius:50%; background:#fff; border:2px solid var(--accent); transform: translateX(-50%); }
+  .minutes-value { font-size: 13px; font-weight: 600; text-align: right; margin-top: 6px; }
+
+  .sheet {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 10;
+    background: var(--surface);
+    border-radius: 18px 18px 0 0;
+    border: 1px solid var(--border);
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.08);
+    padding: 10px 14px 18px;
+  }
+  .grabber { width: 36px; height: 4px; background: var(--border-strong); border-radius: 2px; margin: 0 auto 10px; }
+  .sheet-header { display:flex; justify-content:space-between; align-items:center; font-size: 12px; margin-bottom: 10px; }
+  .sheet-header .count { color: var(--text-secondary); }
+  .sheet-header .edit { color: var(--accent); font-weight: 500; }
+
+  .option-card { border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; margin-bottom: 8px; position: relative; }
+  .option-card.best { border-color: var(--accent); }
+  .best-badge { position:absolute; top:-9px; left:10px; background: var(--accent-bg); color: var(--accent); font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 6px; }
+  .option-top { display:flex; justify-content:space-between; align-items:baseline; font-size: 13px; }
+  .option-route { font-weight: 600; }
+  .option-time { color: var(--text-secondary); font-size: 12px; }
+  .option-meta { display:flex; gap: 10px; margin-top: 5px; font-size: 11px; color: var(--text-secondary); }
+  .scenic-tag { color: var(--success); font-weight: 500; }
+
+  .list-row { display:flex; justify-content:space-between; align-items:center; padding: 10px 4px; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .list-row:last-child { border-bottom: none; }
+  .list-row .station-name { }
+  .list-row .station-sub { font-size: 11px; color: var(--text-secondary); }
+  .chip { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px; }
+  .chip.avoid { background: #fbeae7; color: #993c1d; }
+  .chip.preferred { background: var(--success-bg); color: var(--success); }
+  .chip.add { background: #f1f0ea; color: var(--text-secondary); }
+
+  .settings-header { position: absolute; top: 40px; left: 14px; right: 14px; z-index: 10; display:flex; align-items:center; justify-content:space-between; }
+  .settings-title { font-size: 16px; font-weight: 600; }
+  .settings-sheet { position: absolute; top: 90px; bottom: 0; left: 0; right: 0; background: var(--surface); border-radius: 18px 18px 0 0; border: 1px solid var(--border); padding: 14px; overflow: hidden; }
+  .section-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-secondary); margin: 14px 0 4px; }
+  .segmented { display:flex; background: #f1f0ea; border-radius: 8px; padding: 3px; margin-bottom: 4px; }
+  .seg-btn { flex:1; text-align:center; font-size: 12px; padding: 6px 0; border-radius: 6px; }
+  .seg-btn.active { background: #fff; font-weight: 600; box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+
+  .annotations { margin-top: 16px; font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+  .annotations b { color: var(--text-primary); }
+</style>
+</head>
+<body>
+
+<h1>NYC walk-optimized transit app — storyboard v1</h1>
+<p class="intro">
+  Three core screens for the iPhone MVP. Map background is <b>MKMapView</b> in the real build (shown here as
+  a flat placeholder). Colors/spacing are a starting point, not final brand — adjust freely in SwiftUI.
+  All spacing values below are called out for direct translation to Swift/`padding()` values.
+</p>
+
+<div class="board">
+
+  <!-- SCREEN 1: Home, fewest stops mode -->
+  <div class="frame-block">
+    <div class="frame-label">1 · Home — fewest stops mode</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+      <svg class="map-bg" width="320" height="640" viewBox="0 0 320 640">
+        <rect width="320" height="640" fill="#eceae3"/>
+        <g stroke="#d6d3c8" stroke-width="2">
+          <line x1="0" y1="140" x2="320" y2="130"/>
+          <line x1="0" y1="260" x2="320" y2="250"/>
+          <line x1="0" y1="380" x2="320" y2="390"/>
+          <line x1="60" y1="0" x2="45" y2="640"/>
+          <line x1="180" y1="0" x2="190" y2="640"/>
+        </g>
+        <path d="M0,470 C90,430 140,510 220,470 C270,450 300,500 320,480 L320,640 L0,640 Z" fill="#cfe3f2"/>
+        <circle cx="150" cy="250" r="6" fill="#3c3489"/>
+        <circle cx="230" cy="380" r="6" fill="#185fa5"/>
+      </svg>
+
+      <div class="search-stack">
+        <div class="search-field"><span class="dot-origin"></span><span class="field-text">Red Hook, Brooklyn</span></div>
+        <div class="search-field"><span class="dot-dest"></span><span class="field-text">Top of Central Park</span></div>
+      </div>
+
+      <!-- gap between bottom search field (ends ~y=120) and toggle increased to 24px -->
+      <div class="mode-toggle" style="top: 144px;">
+        <div class="mode-btn active">Fewest stops</div>
+        <div class="mode-btn inactive">Target walk time</div>
+      </div>
+
+      <div class="sheet">
+        <div class="grabber"></div>
+        <div class="sheet-header"><span class="count">3 options</span><span class="edit">Edit avoid list</span></div>
+
+        <div class="option-card best">
+          <span class="best-badge">Best match</span>
+          <div class="option-top"><span class="option-route">Smith-9 St → 103 St</span><span class="option-time">38 min</span></div>
+          <div class="option-meta"><span>🚶 9 + 11 min</span><span>1 transfer</span><span class="scenic-tag">scenic</span></div>
+        </div>
+        <div class="option-card">
+          <div class="option-top"><span class="option-route">Carroll St → Cathedral Pkwy</span><span class="option-time">41 min</span></div>
+          <div class="option-meta"><span>🚶 14 + 6 min</span><span>0 transfers</span></div>
+        </div>
+        <div class="option-card">
+          <div class="option-top"><span class="option-route">Bergen St → 96 St</span><span class="option-time">36 min</span></div>
+          <div class="option-meta"><span>🚶 6 + 8 min</span><span>2 transfers</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="annotations">
+      <b>State:</b> default mode on launch.<br>
+      <b>Spacing fix:</b> gap between second search field and toggle bar is now 24px (was ~8px) — reads as two distinct control groups, not one stack.<br>
+      <b>Tap toggle</b> → animates to Screen 2 (minutes control replaces nothing, it inserts below toggle, sheet resizes).
+    </div>
+  </div>
+
+  <!-- SCREEN 2: Home, target walk time mode -->
+  <div class="frame-block">
+    <div class="frame-label">2 · Home — target walk time mode</div>
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+      <svg class="map-bg" width="320" height="640" viewBox="0 0 320 640">
+        <rect width="320" height="640" fill="#eceae3"/>
+        <g stroke="#d6d3c8" stroke-width="2">
+          <line x1="0" y1="140" x2="320" y2="130"/>
+          <line x1="0" y1="260" x2="320" y2="250"/>
+          <line x1="0" y1="380" x2="320" y2="390"/>
+          <line x1="60" y1="0" x2="45" y2="640"/>
+          <line x1="180" y1="0" x2="190" y2="640"/>
+        </g>
+        <path d="M0,470 C90,430 140,510 220,470 C270,450 300,500 320,480 L320,640 L0,640 Z" fill="#cfe3f2"/>
+        <circle cx="150" cy="250" r="6" fill="#3c3489"/>
+        <circle cx="230" cy="380" r="6" fill="#185fa5"/>
+      </svg>
+
+      <div class="search-stack">
+        <div class="search-field"><span class="dot-origin"></span><span class="field-text">Red Hook, Brooklyn</span></div>
+        <div class="search-field"><span class="dot-dest"></span><span class="field-text">Top of Central Park</span></div>
+      </div>
+
+      <div class="mode-toggle" style="top: 144px;">
+        <div class="mode-btn inactive">Fewest stops</div>
+        <div class="mode-btn active">Target walk time</div>
+      </div>
+
+      <div class="minutes-row" style="top: 190px;">
+        <div class="label">Total walking time</div>
+        <div class="slider-track"><div class="slider-fill"></div><div class="slider-thumb"></div></div>
+        <div class="minutes-value">22 min</div>
+      </div>
+
+      <div class="sheet">
+        <div class="grabber"></div>
+        <div class="sheet-header"><span class="count">3 options near 22 min</span><span class="edit">Edit avoid list</span></div>
+
+        <div class="option-card best">
+          <span class="best-badge">Closest match</span>
+          <div class="option-top"><span class="option-route">Carroll St → 110 St</span><span class="option-time">21 min walk</span></div>
+          <div class="option-meta"><span>🚶 13 + 8 min</span><span>1 transfer</span><span class="scenic-tag">scenic</span></div>
+        </div>
+        <div class="option-card">
+          <div class="option-top"><span class="option-route">Smith-9 St → 96 St</span><span class="option-time">24 min walk</span></div>
+          <div class="option-meta"><span>🚶 9 + 15 min</span><span>1 transfer</span></div>
+        </div>
+        <div class="option-card">
+          <div class="option-top"><span class="option-route">Bergen St → 103 St</span><span class="option-time">19 min walk</span></div>
+          <div class="option-meta"><span>🚶 6 + 13 min</span><span>2 transfers</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="annotations">
+      <b>State:</b> after tapping "Target walk time."<br>
+      <b>New element:</b> minutes slider inserted 24px below toggle, same left/right margins as toggle and search fields (14px).<br>
+      <b>Sheet header</b> changes wording to reflect target minutes context; ranking now shows "closest match" not "best match."
+    </div>
+  </div>
+
+  <!-- SCREEN 3: Avoid / preferred station settings -->
+  <div class="frame-block">
+    <div class="frame-label">3 · Manage avoid / preferred stations</div>
+    <div class="phone" style="background:#fff;">
+      <div class="notch"></div>
+      <div class="status-bar"><span>9:41</span><span>●●●</span></div>
+
+      <div class="settings-header">
+        <span style="color: var(--accent); font-size: 13px;">Done</span>
+        <span class="settings-title">Stations</span>
+        <span style="width: 32px;"></span>
+      </div>
+
+      <div class="settings-sheet">
+        <div class="segmented">
+          <div class="seg-btn active">Avoid</div>
+          <div class="seg-btn">Preferred</div>
+          <div class="seg-btn">Scenic pairs</div>
+        </div>
+
+        <div class="section-label">Currently avoiding</div>
+        <div class="list-row">
+          <div><div class="station-name">Franklin Ave</div><div class="station-sub">C line</div></div>
+          <span class="chip avoid">Remove</span>
+        </div>
+        <div class="list-row">
+          <div><div class="station-name">Rockaway Ave</div><div class="station-sub">A line</div></div>
+          <span class="chip avoid">Remove</span>
+        </div>
+
+        <div class="section-label">Add a station</div>
+        <div class="search-field" style="margin-bottom: 10px;"><span class="field-text">Search stations…</span></div>
+        <div class="list-row">
+          <div><div class="station-name">Nostrand Ave</div><div class="station-sub">A · C line</div></div>
+          <span class="chip add">Add</span>
+        </div>
+        <div class="list-row">
+          <div><div class="station-name">Utica Ave</div><div class="station-sub">A · C line</div></div>
+          <span class="chip add">Add</span>
+        </div>
+      </div>
+    </div>
+    <div class="annotations">
+      <b>State:</b> Avoid tab selected in segmented control.<br>
+      <b>Preferred tab</b> mirrors this layout, chip becomes green "preferred" style instead of red "avoid."<br>
+      <b>Scenic pairs tab</b> lists curated station-pair entries (read-only for v1 — seeded data, not user-editable) with their label, e.g. "Smith-9 St ↔ 103 St — Brooklyn Heights Promenade."
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

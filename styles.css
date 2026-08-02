@@ -1,6 +1,8 @@
 /* ============================================================
-   DESIGN TOKENS â€” v2
-   Reference: Figma UX portfolios
+   DESIGN TOKENS — v2
+   Reference: Marco Cornacchia's portfolio (bento-grid cards,
+   soft shadows, big rounded corners, floating pill nav,
+   conversational personal copy) — reworked lighter + blue.
    ============================================================ */
 
    :root {
@@ -16,7 +18,6 @@
     --accent-soft: #DEE8FD;    /* chip / tag background */
     --accent-transit: #185FA5;
     --accent-food: #2E7D4F;
-    --accent-available: #a1d7b7;
     --shadow-color: 220, 60%, 55%;
   
     /* type */
@@ -64,7 +65,7 @@
     padding: 0 var(--gutter);
   }
   
-  /* soft, blue-tinted shadow used throughout â€” the one recurring "material" */
+  /* soft, blue-tinted shadow used throughout — the one recurring "material" */
   .shadow-soft {
     box-shadow:
       0 1px 2px hsla(var(--shadow-color), 0.06),
@@ -123,7 +124,7 @@
   .header-strip .name {
     font-family: var(--display);
     font-weight: 600;
-    font-size: 24px;
+    font-size: 16px;
     margin: 0;
     color: var(--ink);
     white-space: nowrap;
@@ -132,7 +133,7 @@
     font-size: 13.5px;
     color: var(--ink-soft);
     margin: 0;
-    max-width: 100ch;
+    max-width: 46ch;
     text-align: right;
   }
   
@@ -226,7 +227,7 @@
     flex: 1;
     min-height: 130px;
   }
-  .route-graphic svg:first-child { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .route-graphic > svg:first-child { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
   .pin {
     position: absolute;
     display: flex;
@@ -262,7 +263,7 @@
     color: var(--ink-faint);
     letter-spacing: 0.02em;
   }
-  .p-status-inprogress {
+  .p-status {
     display: inline-block;
     font-family: var(--mono);
     font-size: 11px;
@@ -274,19 +275,7 @@
     border-radius: var(--r-pill);
     margin-top: 8px;
   }
-  .p-status-available {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--accent-food);
-    background: var(--accent-available);
-    padding: 3px 10px;
-    border-radius: var(--r-pill);
-    margin-top: 8px;
-  }
-
+  
   @media (max-width: 560px) {
     .header-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
     .header-strip .bio { text-align: left; }
@@ -309,7 +298,7 @@
   }
   
   /* ============================================================
-     CASE STUDY PAGES â€” v2
+     CASE STUDY PAGES — v2
      ============================================================ */
   
   .case-page { padding: 40px var(--gutter) 80px; max-width: 720px; margin: 0 auto; }
@@ -429,6 +418,33 @@
     border: 1px solid var(--line);
     border-radius: var(--r-sm);
     padding: 16px 18px;
+  }
+  
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .screenshot-grid figure {
+    margin: 0;
+  }
+  .screenshot-grid img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    box-shadow: 0 4px 14px rgba(15,42,87,0.1);
+  }
+  .screenshot-grid figcaption {
+    font-size: 11.5px;
+    color: var(--ink-faint);
+    margin-top: 8px;
+    line-height: 1.4;
+  }
+  
+  @media (max-width: 720px) {
+    .screenshot-grid { grid-template-columns: repeat(2, 1fr); }
   }
   
   @media (max-width: 560px) {

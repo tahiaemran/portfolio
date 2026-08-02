@@ -123,7 +123,7 @@
   .header-strip .name {
     font-family: var(--display);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 24px;
     margin: 0;
     color: var(--ink);
     white-space: nowrap;
@@ -132,7 +132,7 @@
     font-size: 13.5px;
     color: var(--ink-soft);
     margin: 0;
-    max-width: 46ch;
+    max-width: 100ch;
     text-align: right;
   }
   

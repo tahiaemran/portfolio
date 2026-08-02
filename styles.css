@@ -262,6 +262,12 @@
     color: var(--ink-faint);
     letter-spacing: 0.02em;
   }
+  .p-tags-decision {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
   .p-status-inprogress {
     display: inline-block;
     font-family: var(--mono);

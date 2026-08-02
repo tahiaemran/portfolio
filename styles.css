@@ -16,8 +16,8 @@
   --line: #E4E9F5;
   --accent: #2E5AEC;         /* primary blue */
   --accent-soft: #DEE8FD;    /* chip / tag background */
-  --accent-transit: #2E5AEC;
-  --accent-food: #B4622A;    /* warm, muted — tag differentiation only */
+  --accent-transit: #185FA5;
+  --accent-food: #2E7D4F;
   --shadow-color: 220, 60%, 55%;
 
   /* type */
@@ -185,7 +185,7 @@ a:focus-visible, button:focus-visible {
 .project-visual .icon-slot {
   flex: 1;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   padding-top: 6px;
 }

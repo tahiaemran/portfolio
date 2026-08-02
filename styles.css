@@ -421,16 +421,22 @@
   }
   
   .screenshot-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding: 4px 4px 12px;
     margin-top: 8px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
   }
   .screenshot-grid figure {
     margin: 0;
+    flex: 0 0 auto;
+    width: 160px;
+    scroll-snap-align: start;
   }
   .screenshot-grid img {
-    width: 100%;
+    width: 160px;
     display: block;
     border-radius: 12px;
     border: 1px solid var(--line);
@@ -441,10 +447,6 @@
     color: var(--ink-faint);
     margin-top: 8px;
     line-height: 1.4;
-  }
-  
-  @media (max-width: 720px) {
-    .screenshot-grid { grid-template-columns: repeat(2, 1fr); }
   }
   
   @media (max-width: 560px) {

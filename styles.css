@@ -16,6 +16,7 @@
     --accent-soft: #DEE8FD;    /* chip / tag background */
     --accent-transit: #185FA5;
     --accent-food: #2E7D4F;
+    --accent-available: #a1d7b7;
     --shadow-color: 220, 60%, 55%;
   
     /* type */
@@ -261,7 +262,7 @@
     color: var(--ink-faint);
     letter-spacing: 0.02em;
   }
-  .p-status {
+  .p-status-inprogress {
     display: inline-block;
     font-family: var(--mono);
     font-size: 11px;
@@ -273,7 +274,18 @@
     border-radius: var(--r-pill);
     margin-top: 8px;
   }
-  
+  .p-status-available {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent-food);
+    background: var(--accent-available);
+    padding: 3px 10px;
+    border-radius: var(--r-pill);
+    margin-top: 8px;
+  }
   @media (max-width: 560px) {
     .header-strip { flex-direction: column; align-items: flex-start; gap: 8px; }
     .header-strip .bio { text-align: left; }

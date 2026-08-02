@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What's for Dinner — Case Study</title>
+<title>What's for Dinner: Case Study</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,12 +30,12 @@
 
   <section class="case-block">
     <p class="hook-line">"Ugh, what should I have for dinner tonight."</p>
-    <p>This app starts by solving that — helping you decide what to <em>cook</em>, using a curated set of recipes matched to what you have and how much time you've got.</p>
+    <p>This app starts by solving that - helping you decide what to <em>cook</em>, using a curated set of recipes matched to what you have and how much time you've got.</p>
   </section>
 
   <section class="case-block">
     <p class="label">Try it</p>
-    <p>These are real screens from the working build, not a mockup — including the moment the LLM fallback actually fires.</p>
+    <p>These are real screens from the working build, not a mockup - including the moment the LLM fallback actually fires.</p>
     <div class="screenshot-grid">
       <figure>
         <img src="screenshots/eat-1-input.png" alt="Input screen: time available, cuisine, and kitchen ingredients">
@@ -47,7 +47,7 @@
       </figure>
       <figure>
         <img src="screenshots/eat-4-fallback.png" alt="Mood-based input screen for the LLM generation flow">
-        <figcaption>"I'm in the mood for…" — the fallback entry point</figcaption>
+        <figcaption>"I'm in the mood for…" - the LLM generation entry point</figcaption>
       </figure>
       <figure>
         <img src="screenshots/eat-3-mood.png" alt="Generated recipe result flagged as a custom, not-yet-reviewed recipe, showing 15.31 second generation time">
@@ -58,7 +58,7 @@
 
   <section class="case-block">
     <p class="label">Context</p>
-    <p><strong>Trigger:</strong> I love food, and so do my friends — but on a busy night, deciding what to cook (and then actually doing it) is the friction point, not lack of interest in cooking. Existing apps either assume you've already decided or dump you into an infinite recipe scroll.</p>
+    <p><strong>Trigger:</strong> I love food, and so do my friends, but on a busy night, deciding what to cook (and then actually doing it) is the friction point, not lack of interest in cooking. Existing apps either assume you've already decided or dump you into an infinite recipe scroll.</p>
     <p><strong>Who it's for:</strong> someone who wants to decide what to cook tonight, not plan a week ahead.</p>
   </section>
 
@@ -67,25 +67,25 @@
 
     <div class="decision-card">
       <div class="d-row"><span class="k">Decision</span><p class="v">Solve "what do I cook tonight" first, before "should I cook or order in."</p></div>
-      <div class="d-row"><span class="k">Why</span><p class="v">This is the sharpest friction point I and the people around me actually feel. Narrowing scope let me get the app in front of real people fast and iterate on feedback, instead of building two decision flows at once. I'm also betting there's a habit loop here — if deciding is easy enough, people cook at home more and eat healthier as a side effect, not the headline.</p></div>
+      <div class="d-row"><span class="k">Why</span><p class="v">This is the sharpest friction point I and the people around me actually feel. Narrowing scope let me get the app in front of real people fast and iterate on feedback, instead of building two decision flows at once. I'm also betting there's a habit loop here: if deciding is easy enough, people cook at home more and eat healthier as a side effect, not the headline.</p></div>
     </div>
 
     <div class="decision-card">
       <div class="d-row"><span class="k">Decision</span><p class="v">Curated recipe set as the primary match, with LLM generation as a fallback when nothing curated is a strong match.</p></div>
       <div class="d-row"><span class="k">Alternative</span><p class="v">Generate recipes on the fly for every request, or rely on the curated set exclusively.</p></div>
-      <div class="d-row"><span class="k">Why</span><p class="v">Curation gives reliable, trust-building results for the common case — a bad AI-generated recipe kills trust in one try. But curated-only has a hard ceiling. Fallback-not-default gets the reliability of curation for most cases while covering the long tail without hand-curating forever.</p></div>
+      <div class="d-row"><span class="k">Why</span><p class="v">Curation gives reliable, trust-building results for the common case: a bad AI-generated recipe kills trust in one try. But curated-only has a hard ceiling. Fallback-not-default gets the reliability of curation for most cases while covering the long tail without hand-curating forever.</p></div>
     </div>
 
     <div class="decision-card">
       <div class="d-row"><span class="k">Decision</span><p class="v">Manual ingredient entry for v1, not photo/receipt scanning.</p></div>
       <div class="d-row"><span class="k">Alternative</span><p class="v">OCR from a fridge photo or grocery receipt.</p></div>
-      <div class="d-row"><span class="k">Why</span><p class="v">Scanning is impressive infrastructure, but doesn't test the real hypothesis — whether the decide moment works. It also adds reliability risk that would muddy whether a bad experience came from the decision engine or from bad ingredient data.</p></div>
+      <div class="d-row"><span class="k">Why</span><p class="v">Scanning is impressive infrastructure, but doesn't test the real hypothesis: whether the decide moment works. It also adds reliability risk that would muddy whether a bad experience came from the decision engine or from bad ingredient data.</p></div>
     </div>
 
     <div class="decision-card">
-      <div class="d-row"><span class="k">Decision</span><p class="v">Trigger the LLM fallback on <em>any</em> mismatch — ingredients or time — not just when there's no partial match at all.</p></div>
-      <div class="d-row"><span class="k">Alternative</span><p class="v">Keep lenient matching — show the closest partial match even if imperfect, and reserve fallback for true misses.</p></div>
-      <div class="d-row"><span class="k">Why</span><p class="v">A partial match that ignores what you actually have or how much time you have isn't useful — it just moves the decision-fatigue problem instead of solving it. Tightening this made the fallback fire far more than expected, which was uncomfortable at first but the right trade: it forced me to see the real gaps in curation instead of letting lenient matching paper over them.</p></div>
+      <div class="d-row"><span class="k">Decision</span><p class="v">Trigger the LLM fallback on <em>any</em> mismatch - ingredients or time - not just when there's no partial match at all.</p></div>
+      <div class="d-row"><span class="k">Alternative</span><p class="v">Keep lenient matching - show the closest partial match even if imperfect, and reserve fallback for true misses.</p></div>
+      <div class="d-row"><span class="k">Why</span><p class="v">A partial match that ignores what you actually have or how much time you have isn't useful - it just moves the decision-fatigue problem instead of solving it. Tightening this made the fallback fire far more than expected, which was uncomfortable at first but the right trade: it forced me to see the real gaps in curation instead of letting lenient matching paper over them.</p></div>
     </div>
 
   </section>
@@ -93,25 +93,25 @@
   <section class="case-block">
     <p class="label">What I haven't built (yet)</p>
     <ul class="not-built">
-      <li><span class="nb-title">Delivery / order-in suggestions</span>Part of the original problem framing, but not built — scoping this thin or deferring it fully is still an open call.</li>
+      <li><span class="nb-title">Delivery / order-in suggestions</span>Part of the original problem framing, but not built - scoping this thin or deferring it fully is still an open call.</li>
       <li><span class="nb-title">Taste learning / preference profile</span>Planned as a "tell us what you like" side flow to improve ranking and generation over time.</li>
-      <li><span class="nb-title">Photo / barcode ingredient extraction</span>Scoped explicitly as v2 — see decision log above for why this isn't v1.</li>
+      <li><span class="nb-title">Photo / barcode ingredient extraction</span>Scoped explicitly as v2 - see decision log above for why this isn't v1.</li>
     </ul>
   </section>
 
   <section class="case-block">
     <p class="label">Proof it works</p>
-    <p>I've used it myself for 2 weeks and shared it with a few friends. Early matching logic was lenient — a partial match would display directly rather than falling back to generation. I tightened this so any mismatch on ingredients or time triggers the fallback instead of showing a weak match.</p>
+    <p>I've used it myself for 2 weeks and shared it with a few friends. Early matching logic was lenient - a partial match would display directly rather than falling back to generation. I tightened this so any mismatch on ingredients or time triggers the fallback instead of showing a weak match.</p>
     <div class="stat-callout">Fallback now fires on roughly <b>50%</b> of requests</div>
-    <p>Watching those fallback cases, a pattern emerged: the recipes going missing were often the simple, well-loved ones (garlic-and-olive-oil pasta, for instance) — telling me the curated list needs more "boring but reliable" recipes, not more variety.</p>
+    <p>Watching those fallback cases, a pattern emerged: the recipes going missing were often the simple, well-loved ones (garlic-and-olive-oil pasta, for instance) - telling me the curated list needs more "boring but reliable" recipes, not more variety.</p>
   </section>
 
   <section class="case-block">
-    <p class="label">Retro — what I'd change now</p>
+    <p class="label">Retro: what I'd change now</p>
     <ol class="retro-list">
       <li><strong>Ingredient input is too much friction for a first-time user.</strong> Pre-populating common non-perishables (salt, pepper, garlic, onions, pasta) so users only confirm/add proteins and produce; testing voice entry; considering a simple photo/receipt batch-upload to skip typing entirely.</li>
-      <li><strong>Recipe curation and ranking need tightening.</strong> Simple, most-craved recipes were underrepresented, and the ranking algorithm is too generous — it doesn't yet discriminate well between "fine match" and "actually what you wanted."</li>
-      <li><strong>Considering a per-user cache of generated recipes.</strong> Right now, an LLM-generated recipe is gone after the session. Caching per user (starting with local storage, since the app is small enough that this is fine for now) would reduce redundant LLM calls and lay groundwork for a "recipes you've made before" feature. There's an obvious storage-vs-LLM-call trade-off that will matter more as usage grows — not the bottleneck worth over-engineering yet.</li>
+      <li><strong>Recipe curation and ranking need tightening.</strong> Simple, most-craved recipes were underrepresented, and the ranking algorithm is too generous - it doesn't yet discriminate well between "fine match" and "actually what you wanted."</li>
+      <li><strong>Considering a per-user cache of generated recipes.</strong> Right now, an LLM-generated recipe is gone after the session. Caching per user (starting with local storage, since the app is small enough that this is fine for now) would reduce redundant LLM calls and lay groundwork for a "recipes you've made before" feature. There's an obvious storage-vs-LLM-call trade-off that will matter more as usage grows - not the bottleneck worth over-engineering yet.</li>
     </ol>
   </section>
 

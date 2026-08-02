@@ -265,7 +265,7 @@
   .p-tags-decision {
     font-family: var(--mono);
     font-size: 12px;
-    color: var(--ink);
+    color: var(--ink-faint);
     letter-spacing: 0.02em;
   }
   .p-status-inprogress {

@@ -1,8 +1,6 @@
 /* ============================================================
    DESIGN TOKENS — v2
-   Reference: Marco Cornacchia's portfolio (bento-grid cards,
-   soft shadows, big rounded corners, floating pill nav,
-   conversational personal copy) — reworked lighter + blue.
+   Reference: Figma's UX portfolio examples.
    ============================================================ */
 
    :root {
@@ -453,3 +451,4 @@
     .d-row { grid-template-columns: 1fr; gap: 2px; }
     .case-hero, .case-block { padding: 28px 22px; }
   }
+  

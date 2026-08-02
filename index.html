@@ -8,7 +8,7 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,17 +16,34 @@
 <main class="page">
 
   <header class="header-strip">
-    <p class="name">Tahia Emran</p>
+    <p class="name">[Your Name]</p>
     <p class="bio">I build things to make people's lives easier — more of what you enjoy, less decision fatigue.</p>
   </header>
 
   <section class="card-grid" aria-label="Projects">
 
     <a class="project-card shadow-soft" href="case-study-transit.html">
-      <div class="project-visual" style="background:linear-gradient(135deg,#EAF4FC 0%,#BFE0F5 35%,#7FB8E6 70%,#3A82C9 100%);">
-        <div class="q-bubble">"I need to get from the World Trade Center to Williamsburg but I want to get some steps in"</div>
-        <div class="icon-slot">
-          <img src="icons/transit-icon.png" alt="" style="width:72px; height:72px; display:block;">
+      <div class="project-visual transit-visual">
+        <div class="quote-bubble transit-quote">
+          <p>"I need to get from the World Trade Center to Williamsburg but I want to get some steps in"</p>
+        </div>
+        <div class="route-summary">
+          <div class="rs-title">14 St/8 Av to Bedford Av</div>
+          <div class="rs-line">56 min total &nbsp;·&nbsp; <span class="rs-scenic">scenic</span></div>
+          <div class="rs-line muted">30 min walk time</div>
+        </div>
+        <div class="route-graphic">
+          <svg viewBox="0 0 260 140" preserveAspectRatio="none">
+            <path d="M40 25 C 90 48, 150 78, 215 115" stroke="#185FA5" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" fill="none"/>
+          </svg>
+          <div class="pin pin-a">
+            <svg width="32" height="40" viewBox="0 0 34 42"><path d="M17 0C7.6 0 0 7.6 0 17c0 12 17 25 17 25s17-13 17-25C34 7.6 26.4 0 17 0z" fill="#2E8F55"/><circle cx="17" cy="17" r="7" fill="#fff"/><circle cx="17" cy="17" r="3" fill="#2E8F55"/></svg>
+            <span class="pin-label">Pier 40</span>
+          </div>
+          <div class="pin pin-b">
+            <svg width="32" height="40" viewBox="0 0 34 42"><path d="M17 0C7.6 0 0 7.6 0 17c0 12 17 25 17 25s17-13 17-25C34 7.6 26.4 0 17 0z" fill="#C0392B"/><circle cx="17" cy="17" r="7" fill="#fff"/><circle cx="17" cy="17" r="3" fill="#C0392B"/></svg>
+            <span class="pin-label">Domino Park</span>
+          </div>
         </div>
       </div>
       <div class="project-body">
@@ -37,10 +54,22 @@
     </a>
 
     <a class="project-card shadow-soft" href="case-study-eat.html">
-      <div class="project-visual" style="background:linear-gradient(135deg,#EAF7ED 0%,#B9E3C4 35%,#6FC28A 70%,#2E8F55 100%);">
-        <div class="q-bubble">"Ugh, I don't know what to have for dinner tonight"</div>
-        <div class="icon-slot">
-          <img src="icons/food-icon.png" alt="" style="width:72px; height:72px; display:block;">
+      <div class="project-visual food-visual">
+        <div class="quote-bubble food-quote">
+          <p>"Ugh, I don't know what to have for dinner tonight"</p>
+        </div>
+        <div class="recipe-card">
+          <div class="rc-title">Garlic Butter Shrimp Pasta</div>
+          <div class="rc-meta full-match">20 min · 4/4 ingredients</div>
+          <div class="rc-why">You have everything — zero grocery run needed.</div>
+        </div>
+        <div class="recipe-card fade-1">
+          <div class="rc-title">Quick Tomato Pasta</div>
+          <div class="rc-meta partial-match">18 min · 3/4 ingredients</div>
+        </div>
+        <div class="recipe-card fade-2">
+          <div class="rc-title">Sesame Rice Bowl</div>
+          <div class="rc-meta partial-match">15 min · 2/4 ingredients</div>
         </div>
       </div>
       <div class="project-body">
@@ -53,7 +82,7 @@
 
 </main>
 
-<p class="footer-note">Tahia Emran · <a href="mailto:you@example.com">you@example.com</a> · <a href="https://github.com/yourusername">GitHub</a></p>
+<p class="footer-note">[Your Name] · <a href="mailto:you@example.com">you@example.com</a> · <a href="https://github.com/yourusername">GitHub</a></p>
 
 </body>
 </html>
